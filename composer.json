@@ -1,0 +1,9 @@
+{
+    "require": {
+        "dynimage-silex/dynimage-silex": "dev-master",
+        "monolog/monolog"       : "~1.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
+

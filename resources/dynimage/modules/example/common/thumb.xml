@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <imports>
+        <import resource="../../../transformers/thumb.xml"/>
+       
+    </imports>
+    
+    <parameters>
+        <parameter key="thumb.width">300</parameter>
+        <parameter key="thumb.height">150</parameter>
+
+    </parameters>
+</container>

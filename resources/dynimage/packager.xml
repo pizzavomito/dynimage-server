@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   
+    <parameters>
+        
+        <parameter key="packages" type="collection">
+            
+            <parameter key="example" type="collection">
+                <parameter key="enabled">true</parameter>
+                <parameter key="modules" type="collection">
+                    <parameter key="thumb">%dynimage.app_dir%/resources/dynimage/modules/example/%dynimage.env%/thumb.xml</parameter>
+                    <parameter key="preview">%dynimage.app_dir%/resources/dynimage/modules/example/%dynimage.env%/preview.xml</parameter>
+                </parameter>
+            </parameter>
+            
+                       
+            
+        </parameter>
+       
+    </parameters>
+</container>
