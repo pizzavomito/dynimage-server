@@ -4,12 +4,12 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     
     <imports>
-       <import resource="/../transformers/thumb.xml"/>
-       
+        
+        <import resource="../config/prod.xml"/>
+        <import resource="../common/color.xml"/>
+        
+        
     </imports>
     
-    <parameters>
-        <parameter key="thumb.width">600</parameter>
-        <parameter key="thumb.height">600</parameter>
-    </parameters>
+   
 </container>

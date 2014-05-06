@@ -2,10 +2,12 @@
 
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-       
-     <imports>
-        
-        <import resource="default.xml"/>
-        
+    
+    <imports>
+      
+       <import resource="../config/prod.xml"/>
+       <import resource="../common/large.xml"/>
     </imports>
+    
+   
 </container>

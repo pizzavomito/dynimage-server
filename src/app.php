@@ -9,7 +9,7 @@ use DynImageSilex\ControllerProvider;
 use Symfony\Component\HttpFoundation\Response;
 
 //APP_ENV est défini dans le vhost apache
-$app['env'] = getenv('APP_ENV') ? : 'prod';
+//$app['env'] = getenv('APP_ENV') ? : 'prod';
 
 $app->register(new HttpCacheServiceProvider());
 
