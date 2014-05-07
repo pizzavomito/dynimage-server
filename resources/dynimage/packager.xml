@@ -23,6 +23,14 @@
                 </parameter>
             </parameter>
             
+             <parameter key="basic" type="collection">
+                <parameter key="enabled">true</parameter>
+                <parameter key="modules" type="collection">
+                    <parameter key="thumb">%dynimage.app_dir%/resources/dynimage/modules/basic/simple_thumb.xml</parameter>
+                    
+                </parameter>
+            </parameter>
+            
                        
             
         </parameter>

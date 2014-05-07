@@ -10,7 +10,7 @@
     
     <parameters>
  
-        <parameter key="lib">%dynimage.lib_imagick%</parameter>
+        <parameter key="dynimage.driver">%dynimage.driver_imagick%</parameter>
  
     </parameters>
 </container>
