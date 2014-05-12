@@ -1,0 +1,20 @@
+{% extends "Manager/common/layout_without_sidebar.html.twig" %}
+
+
+
+ {% block content %}
+<dl class="dl-horizontal">
+    
+    {% for key,value in libs %}
+  
+    <dt>{{ key }}</dt>
+{% if value %}
+    <dd><span class="label label-success">{{ "yes"|trans }}</span></dd>
+{% else %}
+    <dd><span class="label label-danger">{{ "no"|trans }}</span></dd>
+{% endif %}
+    
+    {% endfor %}
+</dl>
+
+ {% endblock %}

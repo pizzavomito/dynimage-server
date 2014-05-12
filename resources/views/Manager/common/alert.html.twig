@@ -1,0 +1,9 @@
+        {% set alertTypeAvaillable = [ 'info', 'success', 'warning', 'error'] %}
+            {% for alert in alertTypeAvaillable %}
+                {% for message in app.session.getFlashBag.get(alert) %}
+<div class="alert alert-{{ alert }} alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Warning!</strong> {{ message }}.
+</div>
+                {% endfor %}
+            {% endfor %}

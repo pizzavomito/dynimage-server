@@ -1,5 +1,5 @@
 <?php
-/**/
+/** /
 use DynImage\Filter\Resize;
 use DynImage\Filter\Border;
 use DynImage\Filter\Colorize;
@@ -7,6 +7,7 @@ use DynImage\Filter\Reflect;
 use DynImage\Filter\Experimental\WatermarkText;
 use DynImage\DynImage;
 use DynImage\Events;
+
 
 
 $di = new DynImage();
@@ -28,7 +29,7 @@ $image->show('png');
 
 /**/
 
-/** /
+/**/
 use Silex\Provider\HttpCacheServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 
@@ -47,13 +48,7 @@ $app->register(new MonologServiceProvider(), array(
     'monolog.level'   => 0
 ));
 
-$app->register(new DynImageSilexServiceProvider(), array(
-    'dynimage.routes_depth'     => 10,
-    'dynimage.cache_dir'        => __DIR__ . '/../resources/cache/dynimage/'
-));
-
-
-
+$app->register(new DynImageSilexServiceProvider());
 
 
 $app->error(function (\Exception $e, $code) use ($app) {

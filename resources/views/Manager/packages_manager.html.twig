@@ -1,0 +1,27 @@
+{% extends "Manager/common/layout_without_sidebar.html.twig" %}
+
+
+
+{% block content %}
+{% include('Manager/common/editor.html.twig') %}
+{% endblock %}
+
+
+
+{% block footer %}
+{{ parent() }}
+{% include('Manager/common/editor_script.html.twig') %}
+<script>
+ newInsert = function() {
+        editor.gotoLine(editor.session.getLength()+1);
+        editor.insert("#    start new package\n");
+        editor.insert("        package: # change 'package' to the name of your package\n");
+        editor.insert("            enabled: false # true|false\n");
+        editor.insert("            modules:\n");
+        editor.insert("               module1: /path/to/module1 # change 'module1' to the name of your module\n");
+        editor.insert("               module2: /path/to/module2 # change 'module2' to the name of your module\n");
+        editor.insert("               #  here your next module \n");
+        editor.insert("#    end new package\n");
+    };
+</script>
+{% endblock %}

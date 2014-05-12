@@ -1,9 +1,26 @@
 {
+    "autoload": {
+        "psr-0": {
+            "DynImageServer": "src/"
+        }
+    },
     "require": {
         "dynimage-silex/dynimage-silex": "dev-master",
-        "monolog/monolog"       : "~1.0"
+        "silex/silex": "~1.1",
+        "symfony/console": "~2.3",
+        "symfony/form": "~2.3",
+        "symfony/finder": "~2.2",
+        "symfony/security": "~2.3",
+        "symfony/translation": "~2.3",
+        "symfony/twig-bridge": "~2.3",
+        "symfony/validator": "~2.3",
+        "monolog/monolog": "~1.0",
+        "twig/twig": ">=1.8,<2.0-dev",
+        "kriswallsmith/assetic": "~1.1",
+        "mheap/silex-assetic": "~1.0",
+        "leafo/lessphp": "~0.4.0",
+        "silex/web-profiler": "~1.0.1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
-

@@ -1,0 +1,18 @@
+<div>
+    <div id="test" class="" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><span class="fa fa-bug"></span></div>
+    <div id="saved" class="" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ 'Saved'|trans }}"><span class="fa fa-save"></span></div>
+    <div id="lock" class="label label-{{ writable?'success':'danger' }}" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><span class="fa fa-{{ writable?'unlock-alt':'lock' }}"></span></div>
+    <br/>
+
+    <pre id="editor">{{ editor_content }}</pre>
+
+    <button id="btn_test" type="button" class="btn btn-primary btn-sm"><span class="fa fa-bug"></span> {{ 'Testing'|trans }}</button>
+    <button id="btn_save" type="button" class="btn btn-primary btn-sm"><span class="fa fa-save"></span> {{ 'Save'|trans }}</button>
+    <button id="btn_new" type="button" class="btn btn-primary btn-sm"><span class="fa fa-plus"></span> {{ 'New package'|trans }}</button>
+    <textarea readonly id="notify" class="form-control" rows="3"></textarea>
+
+
+</div>
+<hr>
+
+<div id="loaded"></div>

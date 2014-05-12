@@ -1,0 +1,161 @@
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js" type="text/javascript" charset="utf-8" ></script>
+
+<script>
+    var editor = ace.edit("editor");
+    var btnSave = $("#btn_save");
+    var btnNew = $("#btn_new");
+    var btnTest = $("#btn_test");
+
+    var divNotify = $('#notify');
+    var divSaved = $("#saved");
+    var divTest = $("#test");
+    var divLock = $("#lock");
+
+    $('[data-toggle="popover"]').popover({
+    trigger: 'hover',
+        'placement': 'top'
+    });
+
+
+    btnSave.click(function() {
+        save();
+    });
+    btnNew.click(function() {
+        newInsert();
+    });
+    btnTest.click(function() {
+        compileTest();
+    });
+
+    notify = function(msg) {
+        d = new Date();
+        //divNotify.html(msg);
+        divNotify.val( "["+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"] "+msg+"\n"+divNotify.val());
+
+        //divNotify.removeClass().addClass("label label-default");
+    };
+    error = function(msg) {
+        notify(msg);
+        //divNotify.removeClass().addClass("label label-danger");
+    };
+    success = function(msg) {
+        notify(msg);
+        //divNotify.removeClass().addClass("label label-success");
+    };
+    displayLoaded = function() {
+
+        $("#loaded").load("{{ url_display_loaded }}",
+                function(responseText, textStatus, req) {
+
+                    if (textStatus != "success") {
+
+                        change(divSaved,"danger");
+                        disabled(btnSave);
+
+                    }
+                    else {
+                        success("{{ 'Compile successfully'|trans }}");
+                        change(divTest,"success");
+                        {% if writable %}
+                        enabled(btnSave);
+                        {% endif %}
+                    }
+                });
+    };
+    disabled = function(elt) {
+        elt.attr("disabled", "disabled");
+    };
+    enabled = function(elt) {
+        elt.removeAttr("disabled");
+    };
+    change = function(elt,name) {
+        elt.removeClass().addClass("label label-"+name);
+    };
+    compileTest = function() {
+        var contents = editor.getSession().getValue();
+        notify("{{ 'Compilation is in progress'|trans }}");
+        change(divTest,"warning");
+        disabled(btnSave);
+        disabled(btnTest);
+        $.ajax({
+            url: "{{ url_test }}",
+            type: "POST",
+            data: {contents: contents},
+            success: function(data, textStatus, jqXHR)
+            {
+                enabled(btnTest);
+                displayLoaded();
+                reloadPreview();
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+
+                change(divTest,"danger");
+                error(jqXHR.responseText);
+                enabled(btnTest);
+                disabled(btnSave);
+            }
+        });
+    };
+
+    save = function() {
+        var contents = editor.getSession().getValue();
+        notify("{{ 'Save is in progress'|trans }}");
+
+        change(divSaved,"warning");
+        disabled(btnSave);
+        $.ajax({
+            url: "{{ url_save }}",
+            type: "POST",
+            data: {contents: contents},
+            success: function(data, textStatus, jqXHR)
+            {
+                success("{{ 'Saved successfully'|trans }}");
+                change(divSaved,"success");
+                displayLoaded();
+                loadPackagesMenu();
+                reloadPreview();
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                error(jqXHR.responseText);
+                change(divTest,"danger");
+                change(divSaved,"danger");
+                disabled(btnSave);
+            }
+        });
+    };
+
+
+
+    editor.setTheme("ace/theme/idle_fingers");
+    editor.getSession().setMode("ace/mode/xml");
+    editor.getSession().setUseWrapMode(true);
+    //editor.getSession().setTabSize(4);
+    editor.getSession().setUseSoftTabs(true);
+    editor.commands.addCommand({
+        name: 'compileTest',
+        bindKey: {win: 'Ctrl-S', mac: 'Command-S', sender: 'editor|cli'},
+        exec: function() {
+
+            compileTest();
+        }
+    });
+    editor.getSession().on('change', function(e) {
+        change(divSaved,"danger");
+        disabled(btnSave);
+    });
+
+    disabled(btnSave);
+     {% if not writable %}
+    disabled(btnTest);
+    disabled(btnNew);
+    editor.setReadOnly(true);
+    {% endif %}
+    change(divSaved,"success");
+    change(divTest,"success");
+    displayLoaded();
+
+</script>

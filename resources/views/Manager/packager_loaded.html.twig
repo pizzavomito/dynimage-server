@@ -1,0 +1,26 @@
+{% if not error %}
+<div>
+{{ error}}
+    <ul>
+        {% for key,parameter in packager_loaded.parameters %}
+
+             {{ _self.recursiveParse(key,parameter) }}
+    {% endfor %}
+    </ul>
+</div>
+{% else %}
+{{ error}}
+{% endif %}
+
+{% macro recursiveParse(key,parameter) %}
+
+    {% if parameter is iterable %}
+<ul> <h4>{{key}}</h4>
+        {% for key,value in parameter %}
+            {{ _self.recursiveParse(key,value) }}
+        {% endfor %}
+</ul>
+    {% else %}
+<li> {{key}}: {{parameter}}  </li>
+    {% endif %}
+{% endmacro %}

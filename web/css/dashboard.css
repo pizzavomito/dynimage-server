@@ -1,0 +1,175 @@
+#editor { 
+    position: relative;
+    top: 0px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 400px;
+}
+[draggable=true]{
+    cursor: move;
+}
+[draggable=true]:hover{
+    box-shadow:0 0 5px green; /* CSS3 */
+}
+[draggable=true], [dropzone]{
+    transition:
+        box-shadow linear 0.2s,
+        background-color linear 0.2s;
+}
+[draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Required to make elements draggable in old WebKit */
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+}
+[dropzone],
+[webkitdropzone] {
+    border: 3px dashed #ccc;
+    border-radius: 5px;
+    font-size: 5em;
+    display: block;
+    color: #f5f5f5;
+    text-shadow: 0 -1px 1px #d8d8d8;
+    /*position: absolute;*/
+
+    text-align: center;
+    font-weight: bold;
+    /* -webkit-transition: all 0.2s ease-in-out; */
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    /* transition: all 0.2s ease-in-out; */
+
+
+}
+.icon-img
+{
+
+    left:10px;
+    top:10px;
+    padding-left: 5px;
+}   
+.modal-dialog {}
+.thumbnail {margin-bottom:6px;}
+
+.carousel-control.left,.carousel-control.right{
+    background-image:none;
+    margin-top:10%;
+    width:5%;
+}
+#container-img {
+    height: 600px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.container-img {
+    height: 600px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+#container-trash, .thumbnail {
+    float: left;
+
+}
+#container-trash {
+    height: 600px;
+    overflow: scroll;
+    overflow-x: hidden;
+
+
+}
+
+.gallery-container {
+    font-size: 5em;
+    display: block;
+    color: #f5f5f5;
+    text-shadow: 0 -1px 1px #d8d8d8;
+    /*position: absolute;*/
+
+    text-align: center;
+    font-weight: bold;
+}
+/*
+* Style tweaks
+* --------------------------------------------------
+*/
+body {
+    padding-top: 50px;
+    background-color: #f5f5f5;
+
+}
+footer {
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #fff;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 768px) {
+    .row-offcanvas {
+        position: relative;
+        -webkit-transition: all 0.25s ease-out;
+        -moz-transition: all 0.25s ease-out;
+        transition: all 0.25s ease-out;
+    }
+
+    .row-offcanvas-left
+    .sidebar-offcanvas {
+        left: -33%;
+    }
+
+    .row-offcanvas-left.active {
+        left: 33%;
+    }
+
+    .sidebar-offcanvas {
+        position: absolute;
+        top: 0;
+        width: 33%;
+        margin-left: 10px;
+    }
+}
+
+
+
+/* Sidebar navigation */
+.nav-sidebar {
+    background-color: #f5f5f5;
+    margin-right: -15px;
+    margin-bottom: 20px;
+    margin-left: -15px;
+}
+.nav-sidebar > li > a {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.nav-sidebar > .active > a {
+    color: #fff;
+    background-color: #428bca;
+}
+
+/*
+ * Main content
+ */
+
+.main {
+    padding: 20px;
+    background-color: #fff;
+}
+@media (min-width: 768px) {
+    .main {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+}
+.main .page-header {
+    margin-top: 0;
+}

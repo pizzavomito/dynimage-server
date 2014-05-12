@@ -1,0 +1,6 @@
+
+    {% for key,package in packages %}
+    <li><a href="{{ path('package.edit', {packageKey: key}) }}"> {{ key }}</a></li>
+    {% endfor %}
+    <li class="divider"></li>
+    <li><a href="{{ path('packages.manager')}}">{{ 'Packages manager'|trans }}</a></li>

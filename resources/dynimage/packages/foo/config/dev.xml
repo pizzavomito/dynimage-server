@@ -6,7 +6,7 @@
      <imports>
         
         <import resource="default.xml"/>
-        <parameter key="ttl">0</parameter>
+        
         
     </imports>
 </container>

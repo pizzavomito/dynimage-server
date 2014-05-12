@@ -5,7 +5,7 @@
 
     <services>
 
-        <service id="transformer" class="%dynimage.transformer_class%">
+        <service id="dynimage" class="%dynimage.class%">
             <call method="add">
                 <argument type="service" id="dynimage.thumb" />
             </call>

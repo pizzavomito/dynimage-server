@@ -1,0 +1,20 @@
+{% extends "Manager/common/base.html.twig" %}
+{% set title = 'Login' %}
+
+{% block head %}
+{{ parent() }}
+<link href="/css/login.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<form class="form-signin" action="{{ path('manager_login_check') }}" role="form" method="post">
+        <h2 class="form-signin-heading">DynImage Manager</h2>
+        {{ error }}
+        <input  class="form-control" name="_username" value="{{ last_username }}" placeholder="Email address" required="" autofocus="">
+        <input type="password" class="form-control" name="_password" value="" placeholder="Password" required="">
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Connection</button>
+      </form>
+{% endblock %}
