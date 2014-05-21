@@ -7,10 +7,15 @@
        
         <parameter key="images_root_dir">%dynimage.app_dir%/images/</parameter>
         <parameter key="format">png</parameter>
+       
+        <parameter key="dynimage.thumb.arguments" type="collection">
+            <parameter key="width">150</parameter>
+            <parameter key="height">150</parameter>
+        </parameter>
         
-        <parameter key="thumb.arguments" type="collection">
-            <parameter key="width">200</parameter>
-            <parameter key="height">200</parameter>
+        <parameter key="dynimage.dropshadow.arguments" type="collection">
+            <parameter key="opacity">60</parameter>
+            
         </parameter>
   
         
@@ -22,6 +27,9 @@
            
             <call method="add">
                 <argument type="service" id="dynimage.thumb" />
+            </call>
+            <call method="add">
+                <argument type="service" id="dynimage.grayscale" />
             </call>
             <call method="add">
                 <argument type="service" id="dynimage.dropshadow" />

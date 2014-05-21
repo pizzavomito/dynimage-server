@@ -1,0 +1,46 @@
+{% if not error %}
+<div>
+{{ error}}
+    <h3>Driver</h3>
+    <ul><li>{{ driver }}</li></ul>
+        
+    <h3>Parameters</h3>
+    <ul>
+        {% for key,parameter in module_loaded.parameters %}
+
+             {{ _self.recursiveParse(key,parameter) }}
+    {% endfor %}
+        </ul>
+    <h3>Filters</h3>
+    <ul>
+        {% for class,args in filters %}
+        <li><strong>{{ class }}</strong></li>
+                {% if args|length > 0 %}
+                <ul>
+                {% for key,value in args %}
+                    <li><strong>{{ key }}</strong> : {{ value }}</li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+    {% endfor %}
+    </ul>
+</div>
+{% else %}
+<div class="alert alert-danger">{{ error}}</div>
+
+{% endif %}
+
+{% macro recursiveParse(key,parameter) %}
+{% if 'dynimage.' not in key %}
+    {% if parameter is iterable %}
+<li><strong>{{key}}</strong>:</li>
+<ul> 
+        {% for key,value in parameter %}
+            {{ _self.recursiveParse(key,value) }}
+        {% endfor %}
+</ul>
+    {% else %}
+<li> <strong>{{key}}</strong>: {{parameter}}  </li>
+    {% endif %}
+ {% endif %}
+{% endmacro %}

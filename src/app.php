@@ -51,6 +51,7 @@ $app->register(new MonologServiceProvider(), array(
 $app->register(new DynImageSilexServiceProvider());
 
 
+
 $app->error(function (\Exception $e, $code) use ($app) {
 
             switch ($code) {

@@ -1,0 +1,46 @@
+{% extends "Manager/common/layout.html.twig" %}
+{% if active is not defined %}
+{% set active = 'overview' %}
+{% endif %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-2 col-md-offset-5"><img id="preview_dynimage" src="{{ path('preview.dynimage', {package: package, module: module}) }}"></div>
+</div>
+<hr/>
+{% include('Manager/common/editor.html.twig') %}
+
+{% endblock %}
+
+{% block sidebar %}
+<ul class="nav nav-sidebar">
+    <li {{ current_file == module_file['fullname']?'class="active"':''}}><a title="{{module_file['fullname']}}" href="{{ path('module.edit', {package: package, module: module}) }}">{{module_file['name']}}</a></li>
+  {% for from,files in resources %}
+        {% for key,file in files %}
+    <li {{ current_file == file['fullname']?'class="active"':''}}>
+   
+        <a title="{{file['fullname']}}" href="{{ path('module.edit', {package: package, module: module, from: from, key: key}) }}">{{from}}.{{key}}-{{file['value']}}</a>
+    
+
+        
+    </li>
+        {% endfor %}    
+  {% endfor %}
+</ul>
+
+{% endblock %}
+
+{% block footer %}
+{{ parent() }}
+<script>
+    reloadPreview = function() {
+        d = new Date();
+        $("#preview_dynimage").attr("src", "{{ path('preview.dynimage', {package: package, module: module}) }}?" + d.getTime());
+
+    };
+</script>
+{% include('Manager/common/editor_script.html.twig') %}
+
+{% endblock %}

@@ -2,10 +2,10 @@
 
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    
+
     <parameters>
-        <parameter key="enabled">true</parameter>
-        <parameter key="dynimage.driver">%dynimage.driver_gd%</parameter>
+        <parameter key="enabled">false</parameter>
+        
         <parameter key="ttl">94670777</parameter>
         <parameter key="format">png</parameter>
         <parameter key="image_default">%dynimage.app_dir%/images/error.jpg</parameter>

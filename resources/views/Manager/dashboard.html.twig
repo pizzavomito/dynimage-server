@@ -3,18 +3,10 @@
 
 
  {% block content %}
-<dl class="dl-horizontal">
-    
-    {% for key,value in libs %}
-  
-    <dt>{{ key }}</dt>
-{% if value %}
-    <dd><span class="label label-success">{{ "yes"|trans }}</span></dd>
-{% else %}
-    <dd><span class="label label-danger">{{ "no"|trans }}</span></dd>
-{% endif %}
-    
+<ul>    
+{% for key,package in packages %}
+    <li><a href="{{ path('package.show', {packageKey: key}) }}"> {{ key }}</a></li>
     {% endfor %}
-</dl>
-
+   
+    </ul>
  {% endblock %}

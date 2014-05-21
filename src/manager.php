@@ -27,7 +27,7 @@ use DynImageSilex\DynImageSilexServiceProvider;
 
 
 //APP_ENV est défini dans le vhost apache
-$env = getenv('APP_ENV') ? : 'prod';
+//$env = getenv('APP_ENV') ? : 'prod';
 
 $app->register(new HttpCacheServiceProvider());
 
@@ -147,9 +147,10 @@ $app->mount('/' . $app['dyngallery']['routes_prefix'] . '/tympanus', new Gallery
 $app->mount('/' . $app['dyngallery']['routes_prefix'] . '/bootstrap', new Gallery\Themes\Bootstrap\ControllerProvider());
 /**/
 //$app->mount('/' . $app['dynimage.routes_prefix'], new DynImageSilexControllerProvider());
+//$app['dynimage.routes'] = array ('manager_preview' => '/preview_dynimage/{package}/{module}');
 $app->register(new DynImageSilexServiceProvider());
 
-$app->mount('/', new ManagerControllerProvider());
+$app->mount('/manager', new ManagerControllerProvider());
 //$app->mount('/manager/dyngallery', new DynImageServer\Provider\GalleryControllerProvider());
 $app->mount('/login/manager', new LoginControllerProvider());
 $app->mount('/preview_dynimage', new PreviewDynImageControllerProvider());

@@ -1,18 +1,32 @@
 {% extends "Manager/common/layout.html.twig" %}
 
 
- {% block content %}
-<ul>
-{% for key,module in package.modules %}
-    <li>
-        <h4>{{ key }}</h4>
-        <div>file: {{ module }}</div>
 
-        <div><img src="{{ path('preview.dynimage', {package: package_key, module: key}) }}" class="img-thumbnail img-reponsive"></div>
+{% block content %}
+{% include('Manager/common/editor.html.twig') %}
+{% endblock %}
 
-        <div><a href="{{ path('module.manager', {package: package_key, module: key}) }}" class="btn btn-primary btn-sm active" role="button">Edit</a></div>
-        <hr>
+{% block sidebar %}
+<ul class="nav nav-sidebar">
+   
+  {% for file in packages_filename %}
+        
+    <li {{ current_file == file?'class="active"':''}}>
+   
+        <a title="{{file}}" href="{{ path('package.edit', {packageFile: file}) }}">{{ file }}</a>
+    
+
+        
     </li>
-{% endfor %}
+         
+  {% endfor %}
 </ul>
- {% endblock %}
+
+{% endblock %}
+
+{% block footer %}
+{{ parent() }}
+{% include('Manager/common/editor_script.html.twig') %}
+
+
+{% endblock %}

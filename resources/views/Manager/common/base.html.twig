@@ -10,7 +10,7 @@
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="shortcut icon" href="/assets/ico/favicon.ico">
+        <link rel="shortcut icon" href="{{ app.request.basepath }}/assets/ico/favicon.ico">
         <meta name="description" content="{{ title }}" />
         <meta name="keywords" content="{{ title }}"/>
         <link rel="stylesheet" href="{{ app.request.basepath }}/assets/css/styles.css">
@@ -45,7 +45,7 @@
             loadPackagesMenu = function() {
                 $("#menu_packages").load("{{path('packages.menu')}}");
             };
-            loadPackagesMenu();
+           // loadPackagesMenu();
 
         </script>
         {% endblock %}

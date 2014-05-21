@@ -4,12 +4,12 @@
 
 <script>
     var editor = ace.edit("editor");
-    var btnSave = $("#btn_save");
+    var btnDeploy = $("#btn_deploy");
     var btnNew = $("#btn_new");
     var btnTest = $("#btn_test");
 
     var divNotify = $('#notify');
-    var divSaved = $("#saved");
+    var divDeployed = $("#deployed");
     var divTest = $("#test");
     var divLock = $("#lock");
 
@@ -19,8 +19,8 @@
     });
 
 
-    btnSave.click(function() {
-        save();
+    btnDeploy.click(function() {
+        deploy();
     });
     btnNew.click(function() {
         newInsert();
@@ -48,19 +48,20 @@
 
         $("#loaded").load("{{ url_display_loaded }}",
                 function(responseText, textStatus, req) {
-
+                    console.log(textStatus);
                     if (textStatus != "success") {
 
-                        change(divSaved,"danger");
-                        disabled(btnSave);
+                        change(divDeployed,"danger");
+                        disabled(btnDeploy);
 
                     }
                     else {
-                        success("{{ 'Compile successfully'|trans }}");
+                        
                         change(divTest,"success");
                         {% if writable %}
-                        enabled(btnSave);
+                        enabled(btnDeploy);
                         {% endif %}
+                            
                     }
                 });
     };
@@ -77,7 +78,7 @@
         var contents = editor.getSession().getValue();
         notify("{{ 'Compilation is in progress'|trans }}");
         change(divTest,"warning");
-        disabled(btnSave);
+        disabled(btnDeploy);
         disabled(btnTest);
         $.ajax({
             url: "{{ url_test }}",
@@ -86,8 +87,15 @@
             success: function(data, textStatus, jqXHR)
             {
                 enabled(btnTest);
+                enabled(btnDeploy);
                 displayLoaded();
+                
+                if (data != '')
+                success(data);
+                
+                
                 reloadPreview();
+                  
             },
             error: function(jqXHR, textStatus, errorThrown)
             {
@@ -95,35 +103,36 @@
                 change(divTest,"danger");
                 error(jqXHR.responseText);
                 enabled(btnTest);
-                disabled(btnSave);
+                disabled(btnDeploy);
             }
         });
     };
 
-    save = function() {
+    deploy = function() {
         var contents = editor.getSession().getValue();
-        notify("{{ 'Save is in progress'|trans }}");
+        notify("{{ 'Deploy is in progress'|trans }}");
 
-        change(divSaved,"warning");
-        disabled(btnSave);
+        change(divDeployed,"warning");
+        disabled(btnDeploy);
         $.ajax({
-            url: "{{ url_save }}",
+            url: "{{ url_deploy }}",
             type: "POST",
             data: {contents: contents},
             success: function(data, textStatus, jqXHR)
             {
-                success("{{ 'Saved successfully'|trans }}");
-                change(divSaved,"success");
+                success("{{ 'Deployed successfully'|trans }}");
+                change(divDeployed,"success");
                 displayLoaded();
                 loadPackagesMenu();
+              
                 reloadPreview();
             },
             error: function(jqXHR, textStatus, errorThrown)
             {
                 error(jqXHR.responseText);
                 change(divTest,"danger");
-                change(divSaved,"danger");
-                disabled(btnSave);
+                change(divDeployed,"danger");
+                disabled(btnDeploy);
             }
         });
     };
@@ -144,17 +153,17 @@
         }
     });
     editor.getSession().on('change', function(e) {
-        change(divSaved,"danger");
-        disabled(btnSave);
+        change(divDeployed,"danger");
+        disabled(btnDeploy);
     });
 
-    disabled(btnSave);
+    disabled(btnDeploy);
      {% if not writable %}
     disabled(btnTest);
     disabled(btnNew);
     editor.setReadOnly(true);
     {% endif %}
-    change(divSaved,"success");
+    change(divDeployed,"success");
     change(divTest,"success");
     displayLoaded();
 

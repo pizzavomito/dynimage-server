@@ -7,6 +7,7 @@
     "require": {
         "dynimage-silex/dynimage-silex": "dev-master",
         "silex/silex": "~1.1",
+        "symfony/yaml": "2.3.*@dev",
         "symfony/console": "~2.3",
         "symfony/form": "~2.3",
         "symfony/finder": "~2.2",

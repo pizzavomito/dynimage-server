@@ -2,38 +2,13 @@
 
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-   
-    <parameters>
-        
-        <parameter key="packages" type="collection">
+  
+      
+    <services>
+
+        <service id="dynimage.packager" class="%dynimage.packager_class%">
             
-            <parameter key="foo" type="collection">
-                <parameter key="enabled">true</parameter>
-                <parameter key="modules" type="collection">
-                    <parameter key="thumb">%dynimage.app_dir%/resources/dynimage/packages/foo/%dynimage.env%/thumb.xml</parameter>
-                    <parameter key="preview">%dynimage.app_dir%/resources/dynimage/packages/foo/%dynimage.env%/preview.xml</parameter>
-                </parameter>
-            </parameter>
-            
-            <parameter key="bar" type="collection">
-                <parameter key="enabled">true</parameter>
-                <parameter key="modules" type="collection">
-                    <parameter key="large">%dynimage.app_dir%/resources/dynimage/packages/bar/%dynimage.env%/large.xml</parameter>
-                    <parameter key="colored">%dynimage.app_dir%/resources/dynimage/packages/bar/%dynimage.env%/color.xml</parameter>
-                </parameter>
-            </parameter>
-            
-             <parameter key="basic" type="collection">
-                <parameter key="enabled">true</parameter>
-                <parameter key="modules" type="collection">
-                    <parameter key="thumb">%dynimage.app_dir%/resources/dynimage/packages/basic/simple_thumb.xml</parameter>
-                    
-                </parameter>
-            </parameter>
-            
-                       
-            
-        </parameter>
+        </service>
        
-    </parameters>
+    </services>
 </container>

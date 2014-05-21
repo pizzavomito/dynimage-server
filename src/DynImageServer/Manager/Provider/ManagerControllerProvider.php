@@ -13,41 +13,60 @@ class ManagerControllerProvider implements ControllerProviderInterface
 
         $controllers->match('/', 'DynImageServer\Manager\Controller\ManagerController::dashboardAction')
                 ->bind('dashboard');
+        
+        $controllers->match('/configuration', 'DynImageServer\Manager\Controller\ManagerController::configurationAction')
+                ->bind('configuration');
 
         //Packages
+        $controllers->match('/package/edit/{packageFile}', 'DynImageServer\Manager\Controller\PackageController::packageEditAction')
+                ->bind('package.edit');
+        
         $controllers->match('/packages/manager', 'DynImageServer\Manager\Controller\PackageController::packagesManagerAction')
                 ->bind('packages.manager');
 
         $controllers->match('/packages/menu', 'DynImageServer\Manager\Controller\PackageController::packagesMenuAction')
                 ->bind('packages.menu');
 
-        $controllers->match('/package/edit/{packageKey}', 'DynImageServer\Manager\Controller\PackageController::packageEditAction')
-                ->bind('package.edit');
+        $controllers->match('/package/show/{packageKey}', 'DynImageServer\Manager\Controller\PackageController::packageShowAction')
+                ->bind('package.show');
 
-        $controllers->match('/packager/loaded', 'DynImageServer\Manager\Controller\PackageController::packagerLoadedAction')
-                ->bind('packager.loaded');
+        $controllers->match('/package/loaded', 'DynImageServer\Manager\Controller\PackageController::packageContainerLoadedAction')
+                ->bind('package.loaded');
 
-        $controllers->match('/packager/save', 'DynImageServer\Manager\Controller\PackageController::packagerSaveAction')
-                ->bind('packager.save');
+        $controllers->match('/package/deploy', 'DynImageServer\Manager\Controller\PackageController::packageDeployAction')
+                ->bind('package.deploy');
+        
+        $controllers->match('/package/deployandreload', 'DynImageServer\Manager\Controller\PackageController::packageDeployReloadAction')
+                ->bind('package.deployandreload');
+        
+        $controllers->match('/package/new', 'DynImageServer\Manager\Controller\PackageController::packageNewAction')
+                ->bind('package.new');
 
-        $controllers->match('/packager/test', 'DynImageServer\Manager\Controller\PackageController::packagerTestAction')
-                ->bind('packager.test');
+        $controllers->match('/package/test/{packageFile}', 'DynImageServer\Manager\Controller\PackageController::packageTestAction')
+                ->bind('package.test');
 
-        // Modules
-        $controllers->match('/module/edit/{package}/{module}', 'DynImageServer\Manager\Controller\ModuleController::moduleEditAction')
+        
+        
+        
+        
+     
+
+        $controllers->match('/module/edit/{package}/{module}/{from}/{key}', 'DynImageServer\Manager\Controller\ModuleController::moduleEditAction')
+                ->value('from',null)
+                ->value('key',null)
                 ->bind('module.edit');
-
-        $controllers->match('/module/manager/{package}/{module}', 'DynImageServer\Manager\Controller\ModuleController::moduleManagerAction')
-                ->bind('module.manager');
 
         $controllers->match('/module/loaded/{package}/{module}', 'DynImageServer\Manager\Controller\ModuleController::moduleLoadedAction')
                 ->bind('module.loaded');
 
-        $controllers->match('/module/test/{package}/{module}', 'DynImageServer\Manager\Controller\ModuleController::moduleTestAction')
+        $controllers->match('/module/test/{package}/{module}/{from}/{key}', 'DynImageServer\Manager\Controller\ModuleController::moduleTestAction')
+                ->value('from',null)
+                ->value('key',null)
                 ->bind('module.test');
 
-        $controllers->match('/module/save/{package}/{module}', 'DynImageServer\Manager\Controller\ModuleController::moduleSaveAction')
-                ->bind('module.save');
+        $controllers->match('/module/deploy/{package}/{module}', 'DynImageServer\Manager\Controller\ModuleController::moduleDeployAction')
+            
+                ->bind('module.deploy');
 
         $controllers->match('/module/new', 'DynImageServer\Manager\Controller\ModuleController::moduleNewAction')
                 ->bind('module.new');

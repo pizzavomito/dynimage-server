@@ -1,0 +1,26 @@
+{% extends "Manager/common/layout_without_sidebar.html.twig" %}
+
+
+ {% block content %}
+<div class="row">
+{% for key,module in package.modules %}
+
+    
+    <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="{{ path('preview.dynimage', {package: package_key, module: key}) }}">
+      <div class="caption">
+        <h3>{{ key }}</h3>
+        
+        <p><a href="{{ path('module.edit', {package: package_key, module: key}) }}" class="btn btn-primary" role="button"><span class="fa fa-edit"></span> {{ 'Edit'|trans }}</a></p>
+      </div>
+    </div>
+  </div>
+   
+   
+
+
+
+{% endfor %}
+</div>
+ {% endblock %}

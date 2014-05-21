@@ -39,8 +39,5 @@ $app['assetic.input.path_to_js'] = array(
 );
 $app['assetic.output.path_to_js'] = 'js/scripts.js';
 
-// User
-$app['security.users'] = array(
-    'admin' => array(
-        'ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='));
+require_once 'users.php';
 

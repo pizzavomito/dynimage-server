@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+     
+    <parameters>
+       
+             
+        <parameter key="foo.arguments" type="collection">
+            <parameter key="enabled">false</parameter>
+         </parameter>
+        
+        
+    </parameters>   
+                      
+    <services>
+        <!-- modify service id--> 
+        <service id="your_package_id" class="%dynimage.package_class%">
+            
+            <argument>%foo.arguments%</argument>
+            
+            <call method="addModule">
+                <argument>your_module_key</argument>
+                <argument>%dynimage.app_dir%/path/to/%dynimage.env%/thumb.xml</argument>
+            </call>
+           <!-- add other module here -->
+            <tag name="dynimage.package" />
+        </service>
+       
+    </services>
+
+</container>

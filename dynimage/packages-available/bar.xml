@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   
+
+    
+    <parameters>
+       
+             
+        <parameter key="bar.arguments" type="collection">
+            <parameter key="enabled">false</parameter>
+         </parameter>
+        
+        
+    </parameters>             
+                       
+    <services>
+
+        <service id="bar" class="%dynimage.package_class%">
+            <argument>%bar.arguments%</argument>
+            <call method="addModule">
+                <argument>large</argument>
+                <argument>%dynimage.app_dir%/resources/dynimage/packages/bar/%dynimage.env%/large.xml</argument>
+            </call>
+            <call method="addModule">
+                <argument>colored</argument>
+                <argument>%dynimage.app_dir%/resources/dynimage/packages/bar/%dynimage.env%/color.xml</argument>
+            </call>
+            <tag name="dynimage.package" />
+        </service>
+       
+    </services>
+    
+</container>

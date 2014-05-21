@@ -1,0 +1,71 @@
+{% extends "Manager/common/layout_without_sidebar.html.twig" %}
+
+
+
+ {% block content %}
+<h3>{{ 'Extension installed'|trans }}</h3>
+<ul class="list-group">
+
+    {% for key,value in libs %}
+
+
+{% if value %}
+     <li class="list-group-item list-group-item-success">
+             <span class="badge"><span class="fa fa-check"></span></span>
+{% else %}
+   <li class="list-group-item list-group-item-danger">
+             <span class="badge"><span class="fa fa-warning"></span></span>
+{% endif %}
+    {{ key }}
+   </li>         
+    {% endfor %}
+</ul>
+
+
+
+<h3><a href="{{ path('package.deployandreload') }}" class="btn btn-primary" role="button"><span class="fa fa-rocket"></span></a> {{ 'Packages available'|trans }}</h3>
+<form action="{{path('package.new')}}" role="form" class="form-inline" method="post">
+  <div class="form-group">
+    <label for="new_package">{{ "New package"|trans }}</label>
+    <input type="text" class="form-control" id="new_package" name="new_package" placeholder="{{ "Enter package name"|trans }}">
+    
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+  
+</form>
+{% if packages_loaded|length > 0 %}
+<ul class="list-group">
+  {% for key,file in available %}
+
+        
+     {% if file in packages_loaded %}
+         <li class="list-group-item list-group-item-success">
+             <span class="badge"><span class="fa fa-check"></span></span>
+            
+     {% else %}         
+         <li class="list-group-item list-group-item-danger">
+             <span class="badge"><span class="fa fa-warning"></span></span>
+    {% endif %}
+             <a href="{{ path('package.edit', {packageFile: file}) }}" class="btn btn-primary" role="button"><span class="fa fa-edit"></span></a>
+             <a href="{{ path('package.edit', {packageFile: file}) }}" class="btn btn-danger" role="button"><span class="fa fa-trash-o"></span></a>
+    {{ file }}
+    </li>
+
+ {% endfor %}
+</ul>
+{% endif %}
+
+{% if packages_unloaded|length > 0 %}
+<h3>{{ 'Packages error'|trans }}</h3>
+<dl class="dl-horizontal">
+
+
+    {% for file,error in packages_unloaded %}
+    <dt>{{ file }}</dt>
+    <dd>{{ error }}</dd>
+    {% endfor %}
+
+</dl>
+
+{% endif %}
+{% endblock %}

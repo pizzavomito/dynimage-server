@@ -2,12 +2,13 @@
 
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-     <imports>
+    
+      <imports>
         
         <import resource="default.xml"/>
         
+        
     </imports>
-    
     <parameters>
  
         <parameter key="dynimage.driver">%dynimage.driver_imagick%</parameter>

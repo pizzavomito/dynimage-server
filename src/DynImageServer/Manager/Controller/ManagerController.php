@@ -24,6 +24,22 @@ class ManagerController
     /**/
     public function dashboardAction(Request $request, Application $app)
     {
+        $error=false;
+        $packages = array();
+        try {
+
+            $packages = $app['package.service']->getPackages();
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
+        }
+        
+        return $app['twig']->render('Manager\dashboard.html.twig',
+                array('error' => $error,'packages' => $packages, 'title' => 'Dashboard'));
+
+    }
+    
+    public function configurationAction(Request $request, Application $app)
+    {
         
         $libs = array();
         $libs['Gmagick'] = false;
@@ -38,8 +54,37 @@ class ManagerController
         if (extension_loaded('gd') && function_exists('gd_info')) {
             $libs['Gd'] = true;
         }
-        return $app['twig']->render('Manager\dashboard.html.twig',
-                array('libs' => $libs,'title' => 'Dashboard'));
+  
+        $packages = $app['package.service']->getPackages();
+        
+        $container = $app['package.service']->getContainer();
+        
+        $packages_unloaded = array();
+        $packages_loaded = array();
+        
+        if ($container->hasParameter('dynimage.packages_loaded')) {
+             $packages_loaded = $container->getParameter('dynimage.packages_loaded');
+        }
+        
+        if ($container->hasParameter('dynimage.packages_unloaded')) {
+             $packages_unloaded = $container->getParameter('dynimage.packages_unloaded');
+        }
+        
+       
+        $available = array();
+        foreach(glob($app['dynimage.available_dir']."/*.xml") as $filename) {
+            $available[] = basename($filename);
+        }
+       
+        return $app['twig']->render('Manager\configuration.html.twig',
+                array(
+                    'packages_unloaded' => $packages_unloaded,
+                    'packages_loaded' => $packages_loaded,
+                    'packages' => $packages,
+                    'libs' => $libs,
+                    'title' => 'Configuration',
+                    'available' => $available)
+                );
 
     }
 

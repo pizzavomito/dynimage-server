@@ -2,10 +2,20 @@
 
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
+    
+    
+           
     <parameters>
         <parameter key="dynimage.image_test">%dynimage.app_dir%/resources/images/test.jpg</parameter>
-       
+        
+        <!-- add your parameters here
+        <parameter key="my_param_key">my_value</parameter>
+        
+        -->
+  
+        
+        
+    
     </parameters>
        
    
