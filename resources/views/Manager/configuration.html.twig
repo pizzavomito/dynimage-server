@@ -3,6 +3,9 @@
 
 
  {% block content %}
+{% for key,package in packages %}
+<h3> {{key}}:{{ package.isEnabled }}</h3>
+{% endfor %}
 <h3>{{ 'Extension installed'|trans }}</h3>
 <ul class="list-group">
 
@@ -10,14 +13,14 @@
 
 
 {% if value %}
-     <li class="list-group-item list-group-item-success">
-             <span class="badge"><span class="fa fa-check"></span></span>
+    <li class="list-group-item list-group-item-success">
+        <span class="badge"><span class="fa fa-check"></span></span>
 {% else %}
-   <li class="list-group-item list-group-item-danger">
-             <span class="badge"><span class="fa fa-warning"></span></span>
+    <li class="list-group-item list-group-item-danger">
+        <span class="badge"><span class="fa fa-ban"></span></span>
 {% endif %}
     {{ key }}
-   </li>         
+    </li>         
     {% endfor %}
 </ul>
 
@@ -25,30 +28,50 @@
 
 <h3><a href="{{ path('package.deployandreload') }}" class="btn btn-primary" role="button"><span class="fa fa-rocket"></span></a> {{ 'Packages available'|trans }}</h3>
 <form action="{{path('package.new')}}" role="form" class="form-inline" method="post">
-  <div class="form-group">
-    <label for="new_package">{{ "New package"|trans }}</label>
-    <input type="text" class="form-control" id="new_package" name="new_package" placeholder="{{ "Enter package name"|trans }}">
-    
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-  
+    <div class="form-group">
+        <label for="new_package">{{ "New package"|trans }}</label>
+        <input type="text" class="form-control" id="new_package" name="new_package" placeholder="{{ "Enter package name"|trans }}">
+
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+
 </form>
 {% if packages_loaded|length > 0 %}
 <ul class="list-group">
-  {% for key,file in available %}
+  {% for file in packages_available %}
+<span class="label label-primary">{{ file }}</span>
 
-        
+
+
      {% if file in packages_loaded %}
-         <li class="list-group-item list-group-item-success">
-             <span class="badge"><span class="fa fa-check"></span></span>
-            
+
+             {% if file in packages_ids %} 
+    <li class="list-group-item list-group-item-info">
+        
+               {% for id,tfile in packages_ids %}
+                    {% if tfile == file %}
+
+                       {% if packages[id].isEnabled() %}
+        <a rel="tooltip" data-toggle="tooltip" data-placement="top" title="{{ "Enabled"|trans}}" href="{{ path('package.show', {packageKey: id}) }}" class="pull-right btn btn-success" role="button"><span class="fa fa-check"></span> {{ id }}</a>
+
+                       {% else %}
+        <a rel="tooltip" data-toggle="tooltip" data-placement="top" title="{{ "Disabled"|trans}}" href="{{ path('package.show', {packageKey: id}) }}" class="pull-right btn btn-warning" role="button"><span class="fa fa-minus-circle"></span> {{ id }}</a>    
+
+                       {% endif %}
+
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+
+    <li class="list-group-item list-group-item-warning">
+        <span class="badge" rel="tooltip" data-toggle="tooltip" data-placement="top" title="{{ "No service"|trans}}"><span class="fa fa-question"></span></span>
+            {% endif %}
      {% else %}         
-         <li class="list-group-item list-group-item-danger">
-             <span class="badge"><span class="fa fa-warning"></span></span>
+    <li class="list-group-item list-group-item-danger">
+        <span class="badge" rel="tooltip" data-toggle="tooltip" data-placement="top" title="{{ "Error"|trans}}"><span class="fa fa-bug"></span></span>
     {% endif %}
-             <a href="{{ path('package.edit', {packageFile: file}) }}" class="btn btn-primary" role="button"><span class="fa fa-edit"></span></a>
-             <a href="{{ path('package.edit', {packageFile: file}) }}" class="btn btn-danger" role="button"><span class="fa fa-trash-o"></span></a>
-    {{ file }}
+        <a href="{{ path('package.edit', {packageFile: file}) }}" class="btn btn-primary" role="button"><span class="fa fa-edit"></span></a>
+        <a href="{{ path('package.delete', {packageFile: file}) }}" class="btn btn-danger" role="button"><span class="fa fa-trash-o"></span></a>
     </li>
 
  {% endfor %}
@@ -68,4 +91,10 @@
 </dl>
 
 {% endif %}
+{% endblock %}
+
+
+{% block footer %}
+{{ parent()}}
+<script></script>
 {% endblock %}

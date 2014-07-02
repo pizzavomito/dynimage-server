@@ -41,6 +41,7 @@ class ManagerController
     public function configurationAction(Request $request, Application $app)
     {
         
+        
         $libs = array();
         $libs['Gmagick'] = false;
         $libs['Imagick'] = false;
@@ -54,13 +55,23 @@ class ManagerController
         if (extension_loaded('gd') && function_exists('gd_info')) {
             $libs['Gd'] = true;
         }
-  
-        $packages = $app['package.service']->getPackages();
-        
-        $container = $app['package.service']->getContainer();
         
         $packages_unloaded = array();
         $packages_loaded = array();
+        $packages_available = array();
+        $packages_ids = array();
+        
+        try {
+            $packages = $app['package.service']->getPackages();
+            $container = $app['package.service']->getContainer();
+        }
+        catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+        
+        
+       
+  
         
         if ($container->hasParameter('dynimage.packages_loaded')) {
              $packages_loaded = $container->getParameter('dynimage.packages_loaded');
@@ -69,21 +80,26 @@ class ManagerController
         if ($container->hasParameter('dynimage.packages_unloaded')) {
              $packages_unloaded = $container->getParameter('dynimage.packages_unloaded');
         }
+  
+        if ($container->hasParameter('dynimage.packages_ids')) {
+             $packages_ids = $container->getParameter('dynimage.packages_ids');
+        }
         
-       
-        $available = array();
-        foreach(glob($app['dynimage.available_dir']."/*.xml") as $filename) {
-            $available[] = basename($filename);
+        foreach(glob($app['dynimage.packages_dir']."*.xml") as $filename) {
+            $packages_available[] = basename($filename);
         }
        
+        
         return $app['twig']->render('Manager\configuration.html.twig',
                 array(
                     'packages_unloaded' => $packages_unloaded,
                     'packages_loaded' => $packages_loaded,
-                    'packages' => $packages,
+                    'packages_available' => $packages_available,
+                    'packages_ids' => $packages_ids,
                     'libs' => $libs,
-                    'title' => 'Configuration',
-                    'available' => $available)
+                    'packages' => $packages,
+                    'title' => 'Configuration'
+                    )
                 );
 
     }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+                       
+    <services>
+
+        <service id="foo" class="%dynimage.package_class%">
+            <argument>true</argument>
+            <call method="addModule">
+                <argument>thumb</argument>
+                <argument>%dynimage.app_dir%/dynimage/modules/foo/%dynimage.env%/thumb.xml</argument>
+            </call>
+            <call method="addModule">
+                <argument>preview</argument>
+                <argument>%dynimage.app_dir%/dynimage/modules/foo/%dynimage.env%/preview.xml</argument>
+            </call>
+            <tag name="dynimage.package" />
+        </service>
+        
+        
+        <service id="tut" class="%dynimage.package_class%">
+            <argument>true</argument>
+            
+            <call method="addModule">
+                <argument>thumb</argument>
+                <argument>%dynimage.app_dir%/dynimage/modules/foo/%dynimage.env%/thumb.xml</argument>
+            </call>
+            <call method="addModule">
+                <argument>preview</argument>
+                <argument>%dynimage.app_dir%/dynimage/modules/foo/%dynimage.env%/preview.xml</argument>
+            </call>
+            <tag name="dynimage.package" />
+        </service>
+       
+    </services>
+
+</container>

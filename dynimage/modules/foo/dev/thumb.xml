@@ -4,10 +4,10 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     
     <imports>
-      
-       <import resource="config/dev.xml"/>
-       <import resource="common/large.xml"/>
+        
+        <import resource="../config/dev.xml"/>
+        <import resource="../common/thumb.xml"/>
     </imports>
     
    
-</container>
+</container

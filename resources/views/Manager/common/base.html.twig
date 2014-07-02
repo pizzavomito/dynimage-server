@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="{{ app.request.basepath }}/assets/css/styles.css">
 
         <script src="{{ app.request.basepath }}/js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
-        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
 
@@ -40,6 +40,9 @@
                 $('[data-toggle=offcanvas]').click(function() {
                     $('.row-offcanvas').toggleClass('active');
                 });
+                $('span[rel=popover]').popover();
+                $('span[rel=tooltip]').tooltip();
+                
             });
 
             loadPackagesMenu = function() {

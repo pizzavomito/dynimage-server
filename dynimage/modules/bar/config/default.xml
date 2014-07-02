@@ -13,4 +13,18 @@
                
        
     </parameters>
+    
+    <services>
+
+        <service id="dynimage" class="%dynimage.class%">
+            <call method="add">
+                <argument type="service" id="dynimage.thumb" />
+            </call>
+            <call method="add">
+                <argument type="service" id="dynimage.colorize" />
+            </call>
+           
+        </service>
+       
+    </services>
 </container>

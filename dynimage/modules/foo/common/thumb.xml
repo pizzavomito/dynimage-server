@@ -3,10 +3,6 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     
-    <imports>
-        <import resource="../../../transformers/thumb.xml"/>
-       
-    </imports>
     
     <parameters>
         <parameter key="thumb.arguments" type="collection">

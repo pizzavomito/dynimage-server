@@ -12,10 +12,9 @@ $app['http_cache.cache_dir'] = $app['cache.path'] . '/http';
 $app['dynimage.cache'] = false;
 
 
-//$app['dynimage.packager_file'] = __DIR__ . '/../dynimage/packager.xml';
-$app['dynimage.available_dir'] = __DIR__ . '/../../dynimage/packages-available';
+$app['dynimage.packages_dir'] = __DIR__ . '/../../dynimage/packages/';
 $app['dynimage.routes_prefix'] = 'dynimage';
-$app['dynimage.cache_dir'] = $app['cache.path'] . '/dynimage';
+$app['dynimage.cache_dir'] = $app['cache.path'] . '/dynimage/';
 $app['dynimage.routes_depth'] = 10;
 $app['dynimage.extensions'] = array( 'DynImageServer\Manager\Extension');
 

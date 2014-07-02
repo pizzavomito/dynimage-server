@@ -21,6 +21,9 @@ class ManagerControllerProvider implements ControllerProviderInterface
         $controllers->match('/package/edit/{packageFile}', 'DynImageServer\Manager\Controller\PackageController::packageEditAction')
                 ->bind('package.edit');
         
+        $controllers->match('/package/delete/{packageFile}', 'DynImageServer\Manager\Controller\PackageController::packageDeleteAction')
+                ->bind('package.delete');
+        
         $controllers->match('/packages/manager', 'DynImageServer\Manager\Controller\PackageController::packagesManagerAction')
                 ->bind('packages.manager');
 
